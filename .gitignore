@@ -51,3 +51,6 @@ yarn-error.log
 Thumbs.db
 .vscode/
 .idea/
+
+
+terraform_output.json
