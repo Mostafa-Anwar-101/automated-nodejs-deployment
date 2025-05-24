@@ -10,7 +10,7 @@ override.tf.json
 *.tfplan
 *.backup
 .terraform.lock.hcl
-
+terraform_output.json
 # === Ansible ===
 *.retry
 *.log
@@ -23,7 +23,7 @@ ansible.cfg
 *.pem
 *.key
 .ssh/
-
+*.json
 # === Secrets ===
 .env
 .env.*
@@ -51,6 +51,3 @@ yarn-error.log
 Thumbs.db
 .vscode/
 .idea/
-
-
-terraform_output.json
