@@ -24,14 +24,22 @@ output "bastion_public_ip" {
 
 # ----------------------------------------------------------
 
-#                     jenkins_agent outputs
+#               private_instances_private outputs
 
 # ----------------------------------------------------------
 
-output "private_instances_private_ip" {
-  value = module.private_instances.private_ips
+output "private_instance_1_private_ip" {
+  value = module.private_instances.private_ips["private-1"]
 }
 
+output "private_instances_2_private_ip" {
+  value = module.private_instances.private_ips["private-2"]
+}
+
+output "jenkins_slave_private_ip" {
+  value = module.private_instances.jenkins_slave_private_ip
+  
+}
 # ----------------------------------------------------------
 
 #                    ALB outputs
