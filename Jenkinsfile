@@ -15,10 +15,10 @@ pipeline {
           usernameVariable: 'DOCKER_USER',
           passwordVariable: 'DOCKER_PASS'
         )]) {
-          dir('node') {
+          dir('app') {
             sh '''
               echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin
-              sudo docker build -t $DOCKER_IMAGE ./app
+              sudo docker build -t $DOCKER_IMAGE .
               sudo docker push $DOCKER_IMAGE
             '''
           }
