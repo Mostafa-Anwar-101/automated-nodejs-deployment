@@ -17,7 +17,7 @@ terraform_output.json
 *.cache
 *.facts
 inventory.ini
-ansible.cfg
+# ansible.cfg
 
 # === SSH Keys ===
 *.pem

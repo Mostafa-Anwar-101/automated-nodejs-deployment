@@ -1,0 +1,3 @@
+---
+# vars file for private-instances
+image_name: "mostafanwar/my-static-site:latest"

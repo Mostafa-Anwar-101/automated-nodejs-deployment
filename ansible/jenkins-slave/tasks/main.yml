@@ -1,0 +1,54 @@
+---
+# tasks file for jenkins-slave
+- name: update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Install Jenkins slave dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - openjdk-17-jdk
+    - git
+    - docker.io
+    - ansible
+
+- name: Ensure the Docker service is running
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Create jenkins directory
+  file:
+    path: "/home/ubuntu/jenkins"
+    state: directory
+    mode: "0755"
+    owner: ubuntu
+    group: ubuntu
+
+- name: Ensure .ssh directory exists for user
+  file:
+    path: "/home/ubuntu/.ssh/"
+    state: directory
+    mode: "0700"
+    owner: ubuntu
+    group: ubuntu
+
+- name: Copy the SSH config file to the slave host
+  copy:
+    src: "/home/mostafa-anwar/.ssh/config"
+    dest: "/home/ubuntu/.ssh/config"
+    mode: "0600"
+    owner: ubuntu
+    group: ubuntu
+
+- name: Copy Terraform output to remote host
+  copy:
+    src: "../terraform_output.json"
+    dest: "/home/ubuntu/terraform_output.json"
+    mode: "0644"
+    owner: ubuntu
+    group: ubuntu

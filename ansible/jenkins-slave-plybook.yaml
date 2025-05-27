@@ -1,0 +1,6 @@
+- name: running jenkins slave playbook
+  hosts: jenkins-slave
+  become: true
+  gather_facts: true
+  roles:
+    - jenkins-slave

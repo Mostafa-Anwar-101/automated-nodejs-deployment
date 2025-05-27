@@ -1,0 +1,49 @@
+---
+# tasks file for private-instances
+- name: Update APT cache
+  apt:
+    update_cache: yes
+
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: present
+
+- name: Add ubuntu user to Docker group
+  user:
+    name: ubuntu
+    groups: docker
+    append: yes
+
+- name: Start and enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Ensure existing container is removed
+  docker_container:
+    name: my-static-site
+    state: absent
+    force_kill: true
+
+- name: Remove existing Docker image (if any)
+  docker_image:
+    name: "{{ image_name }}"
+    state: absent
+    force: true
+
+- name: Pull latest image
+  docker_image:
+    name: "{{ image_name }}"
+    source: pull
+
+- name: Run Docker container for static site
+  docker_container:
+    name: my-static-site
+    image: "{{ image_name }}"
+    state: started
+    restart_policy: always
+    published_ports:
+      - "80:80"
+

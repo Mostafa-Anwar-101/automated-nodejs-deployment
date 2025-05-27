@@ -1,0 +1,8 @@
+- name: running private-instances playbook
+  hosts: private-instances
+  become: true
+  gather_facts: true
+  roles:
+    - private-instances
+  vars:
+    image_name: "mostafanwar/my-static-site:latest"
