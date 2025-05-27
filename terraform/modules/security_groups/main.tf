@@ -62,9 +62,9 @@ resource "aws_vpc_security_group_ingress_rule" "ssh_from_slave" {
 # Ingress Rule: Node.js (3000) from ALB
 resource "aws_vpc_security_group_ingress_rule" "nodejs_from_alb" {
   security_group_id            = aws_security_group.agent_sg.id
-  description                  = "Node.js app port (3000) from ALB"
-  from_port                    = 3000
-  to_port                      = 3000
+  description                  = "HTTP app port (80) from ALB"
+  from_port                    = 80
+  to_port                      = 80
   ip_protocol                  = "tcp"
   referenced_security_group_id = aws_security_group.alb_sg.id
 }
