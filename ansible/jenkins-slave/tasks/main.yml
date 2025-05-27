@@ -52,3 +52,11 @@
     mode: "0644"
     owner: ubuntu
     group: ubuntu
+
+- name: Copy the SSH private key to the slave host
+  copy:
+    src: "../automated-nodejs-key.pem"
+    dest: "/home/ubuntu/.ssh/automated-nodejs-key.pem"
+    mode: "0600"
+    owner: ubuntu
+    group: ubuntu
